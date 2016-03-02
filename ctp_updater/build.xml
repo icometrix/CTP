@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    <project basedir="." default="all" name="CtpUpdater">
+
+    <path id="classpath">
+        <pathelement location="lib/commons-io-2.4.jar" />
+        <pathelement location="lib/log4j-1.2.17.jar" />
+    </path>
+
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="bin"/>
+         <javac srcdir="src" destdir="bin" includeantruntime="false" classpathref="classpath"/>
+    </target>
+
+    <target name="jar">
+        <!-- <copy todir="."><fileset dir="src_dir"/></copy> -->
+        <jar destfile="CtpUpdater.jar" basedir="bin">
+            <zipgroupfileset dir="lib" />
+            <manifest>
+                <attribute name="Main-Class" value="main.CtpUpdater"/>
+                <attribute name="DependencyFinder" value="main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="all" depends="clean,compile,jar">
+    </target>
+</project>
